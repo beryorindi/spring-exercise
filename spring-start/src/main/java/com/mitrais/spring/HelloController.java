@@ -1,6 +1,7 @@
 package com.mitrais.spring;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,8 +14,10 @@ public class HelloController {
     
     @RequestMapping(value="/hello", method=RequestMethod.GET)
     @ResponseBody
-    public String hello(@RequestParam String message) {
-        return message;
+    public String hello(ModelMap modelMap) {
+
+        modelMap.addAttribute("message", "Hello Spring from JSP");
+        return "hello Spring from JSP";
     }
     
     @RequestMapping(value="/hello", method=RequestMethod.POST)
