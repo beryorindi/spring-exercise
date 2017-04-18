@@ -21,7 +21,7 @@ public class EmployeeControllerTest {
 	
 	@Test
 	public void getMethod() throws Exception {
-		String result = "[{\"name\":\"Hendra\",\"gender\":\"male\"},{\"name\":\"Bery\",\"gender\":\"male\"}]";
+		String result = "[{\"id\":\"1\",\"name\":\"Hendra\",\"gender\":\"male\"},{\"id\":\"3\",\"name\":\"Bery\",\"gender\":\"male\"}]";
 	    this.mockMvc.perform(get("/employees?gender=male"))
 	        .andExpect(status().isOk())
 	    	.andExpect(content().json(result));
@@ -30,8 +30,14 @@ public class EmployeeControllerTest {
 	@Test
 	public void postMethod() throws Exception {
 	    this.mockMvc.perform(post("/employees")
-	    	.content("{\"name\":\"Hendra\",\"gender\":\"male\"}")
+	    	.content("{\"id\":\"1\",\"name\":\"Hendra\",\"gender\":\"male\"}")
 	    	.contentType("application/json"))
 	        .andExpect(status().isOk());
+	}
+	
+	@Test
+	public void getEmployeeById() throws Exception {
+	    this.mockMvc.perform(put("/employees/8"))
+	        .andExpect(status().isNotFound());
 	}
 }
